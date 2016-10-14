@@ -13,3 +13,7 @@
 ##Running the app:
 Run below command in terminal:
 * ./gradlew run
+
+##Pending tasks
+* Adding session handling to the API's
+* Integrating with subscribe create/cancle with APPDirect API's
