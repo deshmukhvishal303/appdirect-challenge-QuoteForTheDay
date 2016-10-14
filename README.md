@@ -16,4 +16,4 @@ Run below command in terminal:
 
 ##Pending tasks
 * Adding session handling to the API's
-* Integrating with subscribe create/cancle with APPDirect API's
+* Integrating with subscribe create/cancel with APPDirect API's
