@@ -1,7 +1,7 @@
 # appdirect-challenge-QuoteForTheDay
 
 ##Feature implemented :
-* RESTFull API's for create, delete, retrieve and update user quotes for the day.
+* RESTFul API's for create, delete, retrieve and update user quotes for the day.
 * Also added API's for user sign up, sign in, sign out
 
 ##Pre-requisites:
