@@ -2,9 +2,11 @@ package com.appdirect.quotes;
 
 import com.appdirect.quotes.service.api.AuthenticationService;
 import com.appdirect.quotes.service.api.QuoteService;
+import com.appdirect.quotes.service.api.SessionService;
 import com.appdirect.quotes.service.api.UserService;
 import com.appdirect.quotes.service.impl.AuthenticationServiceImpl;
 import com.appdirect.quotes.service.impl.QuoteServiceImpl;
+import com.appdirect.quotes.service.impl.SessionServiceImpl;
 import com.appdirect.quotes.service.impl.UserServiceImpl;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.AbstractModule;
@@ -66,6 +68,7 @@ public class QuotesApplication extends Application<QuotesConfiguration> {
                 bind(UserService.class).to(UserServiceImpl.class).asEagerSingleton();
                 bind(AuthenticationService.class).to(AuthenticationServiceImpl.class).asEagerSingleton();
                 bind(QuoteService.class).to(QuoteServiceImpl.class).asEagerSingleton();
+                bind(SessionService.class).to(SessionServiceImpl.class).asEagerSingleton();
             }
         });
         Reflections reflections = new Reflections(PACKAGE_URL);

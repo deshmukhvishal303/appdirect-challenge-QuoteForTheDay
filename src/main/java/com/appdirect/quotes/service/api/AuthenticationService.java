@@ -1,6 +1,7 @@
 package com.appdirect.quotes.service.api;
 
 import com.appdirect.quotes.dto.user.UserSignInRequest;
+import com.appdirect.quotes.dto.user.UserSignInResponse;
 import com.appdirect.quotes.dto.user.UserSignUpRequest;
 import com.appdirect.quotes.service.impl.AuthenticationServiceImpl;
 import com.google.inject.ImplementedBy;
@@ -11,5 +12,5 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(AuthenticationServiceImpl.class)
 public interface AuthenticationService {
     void signUpUser(UserSignUpRequest userSignUpRequest);
-    void signInUser(UserSignInRequest userSignInRequest);
+    UserSignInResponse signInUser(UserSignInRequest userSignInRequest);
 }
