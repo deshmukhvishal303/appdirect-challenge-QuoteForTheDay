@@ -1,6 +1,6 @@
 package com.appdirect.quotes.service.impl;
 
-import com.appdirect.quotes.db.dao.UserDao;
+import com.appdirect.quotes.db.dao.impl.UserDaoImpl;
 import com.appdirect.quotes.db.model.entities.User;
 import com.appdirect.quotes.service.api.UserService;
 import com.google.inject.Inject;
@@ -10,15 +10,15 @@ import com.google.inject.Inject;
  */
 public class UserServiceImpl implements UserService{
 
-    UserDao userDao;
+    UserDaoImpl userDaoImpl;
 
     @Inject
-    public UserServiceImpl(UserDao userDao){
-        this.userDao = userDao;
+    public UserServiceImpl(UserDaoImpl userDaoImpl){
+        this.userDaoImpl = userDaoImpl;
     }
 
     @Override
     public User getUser(Long id) {
-        return userDao.findById(id);
+        return userDaoImpl.findById(id);
     }
 }

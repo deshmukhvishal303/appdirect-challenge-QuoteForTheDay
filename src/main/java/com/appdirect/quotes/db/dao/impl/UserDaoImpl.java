@@ -1,4 +1,4 @@
-package com.appdirect.quotes.db.dao;
+package com.appdirect.quotes.db.dao.impl;
 
 import com.appdirect.quotes.db.model.entities.User;
 import com.appdirect.quotes.exception.UserNotFoundException;
@@ -12,10 +12,10 @@ import java.util.List;
 /**
  * Created by Vishal Deshmukh on 13/10/16.
  */
-public class UserDao extends AbstractDAO<User> {
+public class UserDaoImpl extends AbstractDAO<User> {
 
     @Inject
-    public UserDao(SessionFactory sessionFactory) {
+    public UserDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
 

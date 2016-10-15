@@ -3,6 +3,7 @@ package com.appdirect.quotes.controller;
 import com.appdirect.quotes.dto.generic.FailureResponse;
 import com.appdirect.quotes.dto.generic.SuccessResponse;
 import com.appdirect.quotes.dto.user.UserSignInRequest;
+import com.appdirect.quotes.dto.user.UserSignInResponse;
 import com.appdirect.quotes.dto.user.UserSignUpRequest;
 import com.appdirect.quotes.exception.DuplicateUserException;
 import com.appdirect.quotes.exception.InvalidCredentialsException;
@@ -11,6 +12,8 @@ import com.appdirect.quotes.service.api.AuthenticationService;
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 import io.dropwizard.hibernate.UnitOfWork;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -24,6 +27,7 @@ import javax.ws.rs.core.*;
 @Produces(MediaType.APPLICATION_JSON)
 public class AuthenticationController {
     private AuthenticationService authenticationService;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Inject
     public AuthenticationController(AuthenticationService authenticationService){
@@ -61,12 +65,11 @@ public class AuthenticationController {
     public Response signIn(UserSignInRequest userSignInRequest){
         Response response;
         try{
-            authenticationService.signInUser(userSignInRequest);
+            UserSignInResponse userSignInResponse = authenticationService.signInUser(userSignInRequest);
 
-            String message = "User SignedIn Successfully!!!";
-            SuccessResponse successResponse = new SuccessResponse(message);
+            logger.info("User "+userSignInRequest.getUserName()+" SignedIn Successfully!!!");
 
-            response = Response.status(Response.Status.OK).entity(successResponse).build();
+            response = Response.status(Response.Status.OK).entity(userSignInResponse).build();
         } catch (UserNotFoundException unfe){
             FailureResponse failureResponse = new FailureResponse(unfe.getErrorMessage());
             response = Response.status(Response.Status.BAD_REQUEST).entity(failureResponse).build();

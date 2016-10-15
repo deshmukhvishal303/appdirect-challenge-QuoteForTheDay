@@ -1,5 +1,6 @@
 package com.appdirect.quotes.dto.quote;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -10,9 +11,11 @@ import javax.validation.constraints.NotNull;
 @Data
 public class QuoteCreateRequest {
     @NotNull
+    @JsonProperty(value = "quote")
     private String quote;
 
     @NotNull
+    @JsonProperty(value = "user_name")
     private String userName;
 
     public String getQuote() {

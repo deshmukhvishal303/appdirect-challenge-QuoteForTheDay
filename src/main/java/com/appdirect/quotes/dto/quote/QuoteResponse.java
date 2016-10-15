@@ -1,5 +1,6 @@
 package com.appdirect.quotes.dto.quote;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
  */
 @Data
 public class QuoteResponse {
+    @JsonProperty(value = "quote")
     private List<String> quote;
 
     public List<String> getQuote() {

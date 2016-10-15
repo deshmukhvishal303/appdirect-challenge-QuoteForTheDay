@@ -1,4 +1,4 @@
-package com.appdirect.quotes.db.dao;
+package com.appdirect.quotes.db.dao.impl;
 
 import com.appdirect.quotes.db.model.entities.Quote;
 import com.appdirect.quotes.db.model.entities.User;
@@ -7,6 +7,7 @@ import com.google.inject.Inject;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
@@ -14,12 +15,12 @@ import java.util.List;
 /**
  * Created by Vishal Deshmukh on 13/10/16.
  */
-public class QuoteDao extends AbstractDAO<Quote> {
+public class QuoteDaoImpl extends AbstractDAO<Quote> {
 
-    private org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Inject
-    public QuoteDao(SessionFactory sessionFactory) {
+    public QuoteDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
 

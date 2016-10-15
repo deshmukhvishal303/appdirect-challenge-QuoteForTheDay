@@ -1,5 +1,6 @@
 package com.appdirect.quotes.dto.generic;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
@@ -7,6 +8,7 @@ import lombok.Data;
  */
 @Data
 public class SuccessResponse {
+    @JsonProperty(value = "message")
     private String message;
 
     public SuccessResponse(String message){

@@ -1,5 +1,6 @@
 package com.appdirect.quotes.db.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -17,21 +18,26 @@ public class Quote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
+    @JsonProperty(value = "id")
     private Long id;
 
     @Column(name = "quote")
+    @JsonProperty(value = "quote")
     private String quote;
 
     @Column(name = "created_at")
+    @JsonProperty(value = "created_at")
     @CreationTimestamp
     private Date createdAt;
 
     @Column(name = "updated_at")
+    @JsonProperty(value = "updated_at")
     @UpdateTimestamp
     private Date updatedAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonProperty(value = "user_id")
     private User user;
 
     public Long getId() {

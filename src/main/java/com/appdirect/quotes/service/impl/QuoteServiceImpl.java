@@ -1,7 +1,7 @@
 package com.appdirect.quotes.service.impl;
 
-import com.appdirect.quotes.db.dao.QuoteDao;
-import com.appdirect.quotes.db.dao.UserDao;
+import com.appdirect.quotes.db.dao.impl.QuoteDaoImpl;
+import com.appdirect.quotes.db.dao.impl.UserDaoImpl;
 import com.appdirect.quotes.db.model.entities.Quote;
 import com.appdirect.quotes.db.model.entities.User;
 import com.appdirect.quotes.dto.quote.QuoteCreateRequest;
@@ -22,26 +22,26 @@ import java.util.List;
  */
 public class QuoteServiceImpl implements QuoteService{
 
-    UserDao userDao;
-    QuoteDao quoteDao;
+    UserDaoImpl userDaoImpl;
+    QuoteDaoImpl quoteDaoImpl;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Inject
-    public QuoteServiceImpl(UserDao userDao, QuoteDao quoteDao){
-        this.userDao = userDao;
-        this.quoteDao = quoteDao;
+    public QuoteServiceImpl(UserDaoImpl userDaoImpl, QuoteDaoImpl quoteDaoImpl){
+        this.userDaoImpl = userDaoImpl;
+        this.quoteDaoImpl = quoteDaoImpl;
     }
 
     @Override
     public void createQuote(QuoteCreateRequest quoteCreateRequest) {
 
         try {
-            User user = userDao.findByUserName(quoteCreateRequest.getUserName());
+            User user = userDaoImpl.findByUserName(quoteCreateRequest.getUserName());
             Quote quote = new Quote();
             quote.setQuote(quoteCreateRequest.getQuote());
             quote.setUser(user);
 
-            quoteDao.create(quote);
+            quoteDaoImpl.create(quote);
         } catch(UserNotFoundException unfe){
             String errorMessage = unfe.getErrorMessage();
             logger.error(errorMessage);
@@ -58,7 +58,7 @@ public class QuoteServiceImpl implements QuoteService{
         try {
             Long quoteId = quoteUpdateRequest.getQuoteId();
             String newQuote = quoteUpdateRequest.getQuote();
-            quoteDao.updateQuote(quoteId, newQuote);
+            quoteDaoImpl.updateQuote(quoteId, newQuote);
         } catch (GenericQuotesException gqe){
             throw gqe;
         } catch (Exception e){
@@ -70,7 +70,7 @@ public class QuoteServiceImpl implements QuoteService{
 
     @Override
     public QuoteResponse getQuote(Long id) {
-        Quote quote = quoteDao.findById(id);
+        Quote quote = quoteDaoImpl.findById(id);
 
         if(quote == null){
             String errorMessage = "Invalid Quote Id";
@@ -87,14 +87,14 @@ public class QuoteServiceImpl implements QuoteService{
 
     @Override
     public QuoteResponse getQuoteForUser(String userName) {
-        User user = userDao.findByUserName(userName);
+        User user = userDaoImpl.findByUserName(userName);
         if(user == null){
             String errorMessage = "User Not Found";
             logger.error(errorMessage);
             throw new UserNotFoundException(errorMessage);
         }
 
-        List<Quote> quoteList = quoteDao.findByUser(user);
+        List<Quote> quoteList = quoteDaoImpl.findByUser(user);
 
         if(quoteList == null || quoteList.isEmpty())
             return new QuoteResponse();
@@ -108,7 +108,7 @@ public class QuoteServiceImpl implements QuoteService{
 
     @Override
     public void deleteQuote(Long quoteId) {
-        Quote quote = quoteDao.findById(quoteId);
+        Quote quote = quoteDaoImpl.findById(quoteId);
 
         if(quote == null){
             String errorMessage = "Invalid Quote Id";
@@ -116,6 +116,6 @@ public class QuoteServiceImpl implements QuoteService{
             throw new GenericQuotesException(errorMessage);
         }
 
-        quoteDao.deleteById(quoteId);
+        quoteDaoImpl.deleteById(quoteId);
     }
 }
