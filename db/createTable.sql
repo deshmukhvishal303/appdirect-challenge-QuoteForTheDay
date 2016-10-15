@@ -21,3 +21,12 @@ create table quote_master(
  PRIMARY KEY(id),
  FOREIGN KEY(user_id) REFERENCES user_master(id)
 );
+
+drop table if exists session_master;
+create table session_master(
+ session_id varchar(512) not null,
+ user_id int not null,
+ expiration_time datetime not null,
+ PRIMARY KEY(session_id),
+ FOREIGN KEY(user_id) REFERENCES user_master(id)
+);
