@@ -17,6 +17,7 @@ project.ext {
 dependencies {
     compile group: 'io.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
     compile group: 'io.dropwizard', name: 'dropwizard-hibernate', version: dropwizardVersion
+    compile group: 'com.smoketurner', name: 'dropwizard-swagger', version: '1.0.0-1'
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.4'
     compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.4'
     compile group: 'org.reflections', name: 'reflections', version: '0.9.10'

@@ -19,6 +19,8 @@ import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.hibernate.SessionFactoryFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerBundle;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.hibernate.SessionFactory;
 import org.reflections.Reflections;
 
@@ -57,6 +59,12 @@ public class QuotesApplication extends Application<QuotesConfiguration> {
             }
         };
         bootstrap.addBundle(hibernateBundle);
+        bootstrap.addBundle(new SwaggerBundle<QuotesConfiguration>() {
+            @Override
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(QuotesConfiguration configuration) {
+                return configuration.swaggerBundleConfiguration;
+            }
+        });
     }
 
     @Override

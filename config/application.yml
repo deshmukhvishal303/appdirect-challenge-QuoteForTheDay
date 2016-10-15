@@ -47,3 +47,10 @@ logging:
     io.dropwizard: INFO
   appenders:
     - type: console
+
+swagger:
+  resourcePackage: com.appdirect.quotes.controller
+  title: Quote API
+  version: v1
+  description: Quotes service API
+  contact: deshmukhvishal303@gmail.com

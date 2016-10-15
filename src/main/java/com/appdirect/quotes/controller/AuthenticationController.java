@@ -12,6 +12,8 @@ import com.appdirect.quotes.service.api.AuthenticationService;
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 import io.dropwizard.hibernate.UnitOfWork;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +26,7 @@ import javax.ws.rs.core.Response;
  */
 @Path("/authentication")
 @Produces(MediaType.APPLICATION_JSON)
+@Api(value = "/authentication", description = "Authentication API's")
 public class AuthenticationController {
     private AuthenticationService authenticationService;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -37,6 +40,7 @@ public class AuthenticationController {
     @Path("/user/signup")
     @Timed
     @UnitOfWork
+    @ApiOperation(value = "User SignUp", response = Response.class)
     public Response signUp(UserSignUpRequest userSignUpRequest){
         Response response;
         try{
@@ -61,6 +65,7 @@ public class AuthenticationController {
     @Path("/user/signin")
     @Timed
     @UnitOfWork
+    @ApiOperation(value = "User SignIn", response = Response.class)
     public Response signIn(UserSignInRequest userSignInRequest){
         Response response;
         try{
@@ -84,6 +89,7 @@ public class AuthenticationController {
     @Path("/user/signout")
     @Timed
     @UnitOfWork
+    @ApiOperation(value = "User SignOut", response = Response.class)
     public Response signOut(@HeaderParam("X_SESSION_ID") String sessionId){
         Response response;
         try{

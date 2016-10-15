@@ -10,7 +10,9 @@ import com.appdirect.quotes.exception.UserNotFoundException;
 import com.appdirect.quotes.service.api.QuoteService;
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
+import io.swagger.annotations.Api;
 import io.dropwizard.hibernate.UnitOfWork;
+import io.swagger.annotations.ApiOperation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -21,6 +23,7 @@ import javax.ws.rs.core.Response;
  */
 @Path("/quote")
 @Produces(MediaType.APPLICATION_JSON)
+@Api(value = "/quote", description = "Quote API's")
 public class QuoteController {
     private QuoteService quoteService;
 
@@ -33,6 +36,7 @@ public class QuoteController {
     @Path("/create")
     @Timed
     @UnitOfWork
+    @ApiOperation(value = "Create Quote", response = Response.class)
     public Response createQuote(@HeaderParam("X_SESSION_ID") String sessionId, QuoteCreateRequest quoteCreateRequest){
         Response response;
         try{
@@ -59,6 +63,7 @@ public class QuoteController {
     @Path("/update")
     @Timed
     @UnitOfWork
+    @ApiOperation(value = "Update Quote", response = Response.class)
     public Response updateQuote(@HeaderParam("X_SESSION_ID") String sessionId, QuoteUpdateRequest quoteUpdateRequest){
         Response response;
         try{
@@ -85,6 +90,7 @@ public class QuoteController {
     @Path("/delete/{quote_id}")
     @Timed
     @UnitOfWork
+    @ApiOperation(value = "Delete Quote", response = Response.class)
     public Response deleteQuote(@HeaderParam("X_SESSION_ID") String sessionId, @PathParam("quote_id") Long id){
         Response response;
         try {
@@ -105,6 +111,7 @@ public class QuoteController {
     @Path("/retrieve/{quote_id}")
     @Timed
     @UnitOfWork
+    @ApiOperation(value = "Retrieve Quote by Id", response = Response.class)
     public Response retrieveQuote(@HeaderParam("X_SESSION_ID") String sessionId, @PathParam("quote_id") Long id){
         Response response;
         try {
@@ -126,6 +133,7 @@ public class QuoteController {
     @Path("/retrieve/user/quotes")
     @Timed
     @UnitOfWork
+    @ApiOperation(value = "Retrieve All Quotes for user", response = Response.class)
     public Response retrieveQuoteForUser(@HeaderParam("X_SESSION_ID") String sessionId){
         Response response;
         try {
