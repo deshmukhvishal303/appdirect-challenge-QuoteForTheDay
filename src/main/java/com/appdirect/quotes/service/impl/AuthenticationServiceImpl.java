@@ -12,7 +12,6 @@ import com.appdirect.quotes.exception.UserNotFoundException;
 import com.appdirect.quotes.service.api.AuthenticationService;
 import com.appdirect.quotes.service.api.SessionService;
 import com.google.inject.Inject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

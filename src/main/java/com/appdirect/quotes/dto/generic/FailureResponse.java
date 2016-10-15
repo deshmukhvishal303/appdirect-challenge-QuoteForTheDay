@@ -3,8 +3,6 @@ package com.appdirect.quotes.dto.generic;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import javax.ws.rs.DefaultValue;
-
 /**
  * Created by Vishal Deshmukh on 13/10/16.
  */
