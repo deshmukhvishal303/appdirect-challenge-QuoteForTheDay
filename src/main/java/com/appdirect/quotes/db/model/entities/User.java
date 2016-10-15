@@ -70,4 +70,10 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        User user = (User) obj;
+        return this.getId().equals(user.getId());
+    }
 }

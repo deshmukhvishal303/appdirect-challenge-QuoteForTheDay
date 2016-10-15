@@ -59,4 +59,8 @@ public class QuoteDaoImpl extends AbstractDAO<Quote> {
         quote.setQuote(newQuote);
         currentSession().update(quote);
     }
+
+    public void delete(Quote quote){
+        currentSession().delete(quote);
+    }
 }

@@ -11,9 +11,9 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(QuoteServiceImpl.class)
 public interface QuoteService {
-    void createQuote(QuoteCreateRequest quoteCreateRequest);
-    void updateQuote(QuoteUpdateRequest quoteUpdateRequest);
-    QuoteResponse getQuote(Long id);
-    QuoteResponse getQuoteForUser(String userName);
-    void deleteQuote(Long quoteId);
+    void createQuote(String sessionId, QuoteCreateRequest quoteCreateRequest);
+    void updateQuote(String sessionId, QuoteUpdateRequest quoteUpdateRequest);
+    QuoteResponse getQuote(Long id, String sessionId);
+    QuoteResponse getQuoteForUser(String sessionId);
+    void deleteQuote(Long quoteId, String sessionId);
 }

@@ -33,10 +33,10 @@ public class QuoteController {
     @Path("/create")
     @Timed
     @UnitOfWork
-    public Response createQuote(QuoteCreateRequest quoteCreateRequest){
+    public Response createQuote(@HeaderParam("X_SESSION_ID") String sessionId, QuoteCreateRequest quoteCreateRequest){
         Response response;
         try{
-            quoteService.createQuote(quoteCreateRequest);
+            quoteService.createQuote(sessionId, quoteCreateRequest);
             String message = "Quote Created Successfully!!!";
             SuccessResponse successResponse = new SuccessResponse(message);
 
@@ -59,10 +59,10 @@ public class QuoteController {
     @Path("/update")
     @Timed
     @UnitOfWork
-    public Response updateQuote(QuoteUpdateRequest quoteUpdateRequest){
+    public Response updateQuote(@HeaderParam("X_SESSION_ID") String sessionId, QuoteUpdateRequest quoteUpdateRequest){
         Response response;
         try{
-            quoteService.updateQuote(quoteUpdateRequest);
+            quoteService.updateQuote(sessionId, quoteUpdateRequest);
             String message = "Quote Updated Successfully!!!";
             SuccessResponse successResponse = new SuccessResponse(message);
 
@@ -85,10 +85,10 @@ public class QuoteController {
     @Path("/delete/{quote_id}")
     @Timed
     @UnitOfWork
-    public Response deleteQuote(@PathParam("quote_id") Long id){
+    public Response deleteQuote(@HeaderParam("X_SESSION_ID") String sessionId, @PathParam("quote_id") Long id){
         Response response;
         try {
-            quoteService.deleteQuote(id);
+            quoteService.deleteQuote(id, sessionId);
             response = Response.status(Response.Status.OK).build();
         } catch (GenericQuotesException gqe){
             FailureResponse failureResponse = new FailureResponse(gqe.getErrorMessage());
@@ -105,10 +105,10 @@ public class QuoteController {
     @Path("/retrieve/{quote_id}")
     @Timed
     @UnitOfWork
-    public Response retrieveQuote(@PathParam("quote_id") Long id){
+    public Response retrieveQuote(@HeaderParam("X_SESSION_ID") String sessionId, @PathParam("quote_id") Long id){
         Response response;
         try {
-            QuoteResponse quoteResponse = quoteService.getQuote(id);
+            QuoteResponse quoteResponse = quoteService.getQuote(id, sessionId);
 
             response = Response.status(Response.Status.OK).entity(quoteResponse).build();
         } catch (GenericQuotesException gqe){
@@ -123,13 +123,13 @@ public class QuoteController {
     }
 
     @GET
-    @Path("/retrieve/quote/{user}")
+    @Path("/retrieve/user/quotes")
     @Timed
     @UnitOfWork
-    public Response retrieveQuoteForUser(@PathParam("user") String user){
+    public Response retrieveQuoteForUser(@HeaderParam("X_SESSION_ID") String sessionId){
         Response response;
         try {
-            QuoteResponse quoteResponse = quoteService.getQuoteForUser(user);
+            QuoteResponse quoteResponse = quoteService.getQuoteForUser(sessionId);
 
             if(quoteResponse.getQuote() == null || quoteResponse.getQuote().isEmpty())
                 response = Response.status(Response.Status.NO_CONTENT).build();

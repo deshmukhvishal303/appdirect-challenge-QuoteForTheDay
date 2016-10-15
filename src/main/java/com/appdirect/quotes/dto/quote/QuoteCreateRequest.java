@@ -14,23 +14,11 @@ public class QuoteCreateRequest {
     @JsonProperty(value = "quote")
     private String quote;
 
-    @NotNull
-    @JsonProperty(value = "user_name")
-    private String userName;
-
     public String getQuote() {
         return quote;
     }
 
     public void setQuote(String quote) {
         this.quote = quote;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 }

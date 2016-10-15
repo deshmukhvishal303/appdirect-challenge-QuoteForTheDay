@@ -15,9 +15,7 @@ import io.dropwizard.hibernate.UnitOfWork;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
 /**
@@ -70,11 +68,31 @@ public class AuthenticationController {
             logger.info("User "+userSignInRequest.getUserName()+" SignedIn Successfully!!!");
 
             response = Response.status(Response.Status.OK).entity(userSignInResponse).build();
-        } catch (UserNotFoundException unfe){
+        } catch (UserNotFoundException | InvalidCredentialsException unfe){
             FailureResponse failureResponse = new FailureResponse(unfe.getErrorMessage());
             response = Response.status(Response.Status.BAD_REQUEST).entity(failureResponse).build();
-        } catch (InvalidCredentialsException ice){
-            FailureResponse failureResponse = new FailureResponse(ice.getErrorMessage());
+        } catch (Exception e){
+            FailureResponse failureResponse = new FailureResponse();
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(failureResponse).build();
+        }
+
+        return response;
+    }
+
+    @DELETE
+    @Path("/user/signout")
+    @Timed
+    @UnitOfWork
+    public Response signOut(@HeaderParam("X_SESSION_ID") String sessionId){
+        Response response;
+        try{
+            authenticationService.signOutUser(sessionId);
+
+            logger.info("User SignedOut Successfully!!!");
+
+            response = Response.status(Response.Status.NO_CONTENT).build();
+        } catch (UserNotFoundException | InvalidCredentialsException unfe){
+            FailureResponse failureResponse = new FailureResponse(unfe.getErrorMessage());
             response = Response.status(Response.Status.BAD_REQUEST).entity(failureResponse).build();
         } catch (Exception e){
             FailureResponse failureResponse = new FailureResponse();

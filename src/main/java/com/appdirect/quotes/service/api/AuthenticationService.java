@@ -13,4 +13,5 @@ import com.google.inject.ImplementedBy;
 public interface AuthenticationService {
     void signUpUser(UserSignUpRequest userSignUpRequest);
     UserSignInResponse signInUser(UserSignInRequest userSignInRequest);
+    void signOutUser(String sessionId);
 }

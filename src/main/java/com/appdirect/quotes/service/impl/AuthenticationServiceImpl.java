@@ -1,6 +1,7 @@
 package com.appdirect.quotes.service.impl;
 
 import com.appdirect.quotes.db.dao.impl.UserDaoImpl;
+import com.appdirect.quotes.db.model.entities.Session;
 import com.appdirect.quotes.db.model.entities.User;
 import com.appdirect.quotes.dto.user.UserSignInRequest;
 import com.appdirect.quotes.dto.user.UserSignInResponse;
@@ -75,5 +76,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             logger.error(errorMessage);
             throw new UserNotFoundException(errorMessage);
         }
+    }
+
+    @Override
+    public void signOutUser(String sessionId) {
+        Session session = sessionService.getSessionFromId(sessionId);
+        if(session == null){
+            String errorMessage = "Invalid Session Id";
+            logger.error(errorMessage);
+            throw new UserNotFoundException(errorMessage);
+        }
+
+        sessionService.deleteSession(session);
     }
 }

@@ -1,5 +1,6 @@
 package com.appdirect.quotes.service.api;
 
+import com.appdirect.quotes.db.model.entities.Session;
 import com.appdirect.quotes.db.model.entities.User;
 import com.appdirect.quotes.service.impl.SessionServiceImpl;
 import com.google.inject.ImplementedBy;
@@ -10,4 +11,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(SessionServiceImpl.class)
 public interface SessionService {
     String createSession(User user);
+    void deleteSession(Session session);
+    Session getSessionFromId(String sessionId);
 }

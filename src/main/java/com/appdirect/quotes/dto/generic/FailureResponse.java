@@ -11,9 +11,8 @@ import javax.ws.rs.DefaultValue;
 @Data
 public class FailureResponse {
 
-    @DefaultValue("Some Exception Occurred!!! Please contact Admin")
     @JsonProperty(value = "error_message")
-    private String errorMessage;
+    private String errorMessage = "Some Exception Occurred!!! Please contact Admin";
 
     public FailureResponse(){
     }
