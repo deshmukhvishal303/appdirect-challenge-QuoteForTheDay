@@ -30,3 +30,14 @@ create table session_master(
  PRIMARY KEY(session_id),
  FOREIGN KEY(user_id) REFERENCES user_master(id)
 );
+
+drop table if exists profile_master;
+create table profile_master(
+ id int not null AUTO_INCREMENT,
+ email varchar(20) not null,
+ open_id varchar(40) not null,
+ first_name varchar(20) not null,
+ last_name varchar(20) not null,
+ PRIMARY KEY(id),
+ UNIQUE (email, open_id)
+);
