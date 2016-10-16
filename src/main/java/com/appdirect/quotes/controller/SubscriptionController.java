@@ -69,7 +69,7 @@ public class SubscriptionController {
         return response;
     }
 
-    @POST
+    @DELETE
     @Path("/cancel?event_url={event_url}")
     @Timed
     @UnitOfWork
